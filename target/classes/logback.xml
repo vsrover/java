@@ -18,16 +18,12 @@
 
 
 
-    <appender name="FILE-THREAD" class="ch.qos.logback.classic.sift.SiftingAppender">
-
+    <appender name="FILE-ROLLING" class="ch.qos.logback.classic.sift.SiftingAppender">
         <discriminator>
             <key>logFileName</key>
             <defaultValue>ims3</defaultValue>
         </discriminator>
-
         <sift>
-
-            <!-- A standard RollingFileAppender, the log file is based on 'logFileName' at runtime  -->
             <appender name="FILE-${logFileName}" class="ch.qos.logback.core.rolling.RollingFileAppender">
                 <file>C:\logs\${logFileName}.log</file>
 
@@ -39,17 +35,14 @@
                     <MinIndex>1</MinIndex>
                     <MaxIndex>10</MaxIndex>
                 </rollingPolicy>
-
                 <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
                     <MaxFileSize>10MB</MaxFileSize>
                 </triggeringPolicy>
-
             </appender>
-
         </sift>
     </appender>
 
     <logger name="com" level="info">
-        <appender-ref ref="FILE-THREAD"/>
+        <appender-ref ref="FILE-ROLLING"/>
     </logger>
 </configuration>
