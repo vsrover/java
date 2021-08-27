@@ -1,23 +1,4 @@
 <configuration scan="true" scanPeriod="60 seconds">
-    <!--    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
-    <!--        <file>C:\omg\ims3.log</file>-->
-    <!--        <encoder>-->
-    <!--            <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>-->
-    <!--        </encoder>-->
-    <!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
-    <!--            <fileNamePattern>C:\omg\archive\ims3-log-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>-->
-    <!--            &lt;!&ndash; each file should be at most 10MB, keep 60 days worth of history, but at most 10GB &ndash;&gt;-->
-    <!--            <maxFileSize>1MB</maxFileSize>-->
-    <!--            <maxHistory>60</maxHistory>-->
-    <!--            <totalSizeCap>10GB</totalSizeCap>-->
-    <!--        </rollingPolicy>-->
-    <!--    </appender>-->
-<!--    <logger name="com" level="info">-->
-<!--        <appender-ref ref="FILE-ROLLING"/>-->
-<!--    </logger>-->
-
-
-
     <appender name="FILE-ROLLING" class="ch.qos.logback.classic.sift.SiftingAppender">
         <discriminator>
             <key>logFileName</key>
@@ -26,14 +7,15 @@
         <sift>
             <appender name="FILE-${logFileName}" class="ch.qos.logback.core.rolling.RollingFileAppender">
                 <file>C:\logs\${logFileName}.log</file>
-
                 <encoder>
                     <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>
                 </encoder>
                 <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-                    <FileNamePattern>C:\logs\archive\ims3-log-%d{yyyy-MM-dd}.%i.zip</FileNamePattern>
-                    <MinIndex>1</MinIndex>
-                    <MaxIndex>10</MaxIndex>
+                    <fileNamePattern>C:\logs\archive\ims3-log-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+                    <!-- each file should be at most 10MB, keep 60 days worth of history, but at most 10GB -->
+                    <maxFileSize>1MB</maxFileSize>
+                    <maxHistory>60</maxHistory>
+                    <totalSizeCap>10GB</totalSizeCap>
                 </rollingPolicy>
                 <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
                     <MaxFileSize>10MB</MaxFileSize>
@@ -41,7 +23,6 @@
             </appender>
         </sift>
     </appender>
-
     <logger name="com" level="info">
         <appender-ref ref="FILE-ROLLING"/>
     </logger>
