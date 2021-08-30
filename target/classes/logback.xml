@@ -49,21 +49,21 @@
     </logger>
 
     <!--========================-->
-    <appender name="INTEGRATION-TRANSACTION-ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>C:\logs\integration-transaction-error.log</file>
+    <appender name="INTEGRATION-TRANSACTION-FAIL-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>C:\logs\integration-transaction-fail.log</file>
         <encoder>
             <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>C:\logs\integration-archive\integration-transaction-error-log-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <fileNamePattern>C:\logs\integration-archive\integration-transaction-fail-log-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
             <!-- each file should be at most 10MB, keep 60 days worth of history, but at most 10GB -->
             <maxFileSize>1MB</maxFileSize>
             <maxHistory>60</maxHistory>
             <totalSizeCap>10GB</totalSizeCap>
         </rollingPolicy>
     </appender>
-    <logger name="integration-transaction-err" level="DEBUG" additivity="false">
-        <appender-ref ref="INTEGRATION-TRANSACTION-ERROR-FILE"/>
+    <logger name="integration-transaction-fail" level="DEBUG" additivity="false">
+        <appender-ref ref="INTEGRATION-TRANSACTION-FAIL-FILE"/>
     </logger>
     <!--========================-->
 

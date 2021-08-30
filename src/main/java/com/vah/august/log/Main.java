@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final Logger logger2 = LoggerFactory.getLogger("integration-transaction-err");
+    private static final Logger logger2 = LoggerFactory.getLogger("integration-transaction-fail");
 
     public static void main(String[] args) {
         logger.error("omg {}", new Object());
