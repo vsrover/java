@@ -48,18 +48,23 @@
         <appender-ref ref="FILE-ROLLING" />
     </logger>
 
-<!--    ========================-->
-    <appender name="ANALYTICS-FILE" class="ch.qos.logback.core.FileAppender">
-        <file>C:\logs\analytics.log</file>
-        <append>true</append>
+    <!--========================-->
+    <appender name="INTEGRATION-TRANSACTION-ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>C:\logs\integration-transaction-error.log</file>
         <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg %n</pattern>
+            <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>
         </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>C:\logs\integration-archive\integration-transaction-error-log-%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
+            <!-- each file should be at most 10MB, keep 60 days worth of history, but at most 10GB -->
+            <maxFileSize>1MB</maxFileSize>
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
     </appender>
-    <!-- additivity=false ensures analytics data only goes to the analytics log -->
-    <logger name="analytics" level="DEBUG" additivity="false">
-        <appender-ref ref="ANALYTICS-FILE"/>
+    <logger name="integration-transaction-err" level="DEBUG" additivity="false">
+        <appender-ref ref="INTEGRATION-TRANSACTION-ERROR-FILE"/>
     </logger>
-    <!--    ========================-->
+    <!--========================-->
 
 </configuration>
